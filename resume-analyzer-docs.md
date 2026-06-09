@@ -759,4 +759,4 @@ cd client && npm run dev           # runs on :5173
 
 ---
 
-*HireSignal — Built for Aman, powered by Claude.*
+*HireSignal — Built for Aman*
