@@ -1,0 +1,6 @@
+server/.env
+server/uploads/
+server/outputs/
+node_modules/
+client/node_modules/
+server/node_modules/
