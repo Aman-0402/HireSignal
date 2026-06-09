@@ -386,10 +386,10 @@ The wizard accumulates a single `wizardData` object as user progresses:
   "personal": {
     "name": "Aman Raj",
     "location": "Vadodara, Gujarat",
-    "email": "aman@example.com",
-    "phone": "+91 98765 43210",
+    "email": "aman08.stars@gmail.com",
+    "phone": "+91 9852104967",
     "linkedin": "linkedin.com/in/aman",
-    "github": "github.com/aman"
+    "github": "github.com/aman-0402"
   },
   "experienceLevel": "3-5 Years",
   "workHistory": [
