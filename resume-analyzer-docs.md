@@ -384,7 +384,7 @@ The wizard accumulates a single `wizardData` object as user progresses:
 ```json
 {
   "personal": {
-    "name": "Aman Sharma",
+    "name": "Aman Raj",
     "location": "Vadodara, Gujarat",
     "email": "aman@example.com",
     "phone": "+91 98765 43210",
