@@ -1,17 +1,21 @@
-import PdfPrinter from 'pdfmake'
+import { createRequire } from 'module'
+import path from 'path'
+import fs from 'fs'
+import os from 'os'
 
-const fonts = {
+const require = createRequire(import.meta.url)
+const pdfmake = require('pdfmake')
+
+pdfmake.addFonts({
   Helvetica: {
     normal: 'Helvetica',
     bold: 'Helvetica-Bold',
     italics: 'Helvetica-Oblique',
     bolditalics: 'Helvetica-BoldOblique',
   },
-}
+})
 
-const printer = new PdfPrinter(fonts)
-
-export function generateResumePDF(resumeData) {
+export async function generateResumePDF(resumeData) {
   const { name, summary, experience = [], skills = [], projects = [], education } = resumeData
 
   const content = []
@@ -59,16 +63,13 @@ export function generateResumePDF(resumeData) {
     pageMargins: [40, 40, 40, 40],
   }
 
-  return new Promise((resolve, reject) => {
-    try {
-      const pdfDoc = printer.createPdfKitDocument(docDefinition)
-      const chunks = []
-      pdfDoc.on('data', (chunk) => chunks.push(chunk))
-      pdfDoc.on('end', () => resolve(Buffer.concat(chunks)))
-      pdfDoc.on('error', reject)
-      pdfDoc.end()
-    } catch (err) {
-      reject(err)
-    }
-  })
+  const tmpPath = path.join(os.tmpdir(), `hiresignal-${Date.now()}.pdf`)
+  try {
+    const doc = pdfmake.createPdf(docDefinition)
+    await doc.write(tmpPath)
+    const buffer = fs.readFileSync(tmpPath)
+    return buffer
+  } finally {
+    fs.unlink(tmpPath, () => {})
+  }
 }
